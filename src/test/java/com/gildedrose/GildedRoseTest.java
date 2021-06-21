@@ -5,16 +5,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class GildedRoseTest {
-	static final String AGED_BRIE = "Aged Brie";
-	static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
-	static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-	static final String DEFAULT_VALUE = "any item";
+	private static final String AGED_BRIE = "Aged Brie";
+	private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+	private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+	private static final String DEFAULT_VALUE = "any item";
+	private static final String CONJURED_VALUE = "Conjured...";
 
 	private GildedRose prepareTest(String itemName, int itemQuality, int itemSellIn) {
 		final Item[] items = new Item[] { new Item(itemName, itemSellIn, itemQuality) };
 		return new GildedRose(items);
 	}
 
+	
+	/* 
+	 * 
+	 * Testing quality attributes test cases
+	 * 
+	 *  */
 	@Test
 	void whenDefaultAndNonNegativeSellInShouldDecrementQualityBy1() {
 		// prepare
@@ -26,7 +33,7 @@ class GildedRoseTest {
 		app.updateQuality();
 
 		// test
-		assertEquals(app.items[0].quality, quality - 1);
+		assertEquals( quality - 1, app.items[0].quality);
 	}
 
 	@Test
@@ -52,7 +59,7 @@ class GildedRoseTest {
 
 		app.updateQuality();
 
-		assertEquals(app.items[0].quality, quality - 2);
+		assertEquals(quality - 2, app.items[0].quality);
 	}
 
 	@Test
@@ -180,8 +187,6 @@ class GildedRoseTest {
 	}
 
 	@Test
-	// The quality of Backstage passes falls to 0 when sellIn = 0 when quality > 0,
-	// sellIn <= 0
 	void whenBackstagePassesAndSellInIsNegativeThenQualityIsZero() {
 		final int quality = 10;
 		final int sellIn = 0;
@@ -192,6 +197,65 @@ class GildedRoseTest {
 
 		assertEquals(0, app.items[0].quality);
 	}
+	
+	
+	@Test
+	void whenConjuredAndNonNegativeSellInShouldDecrementQualityBy2() {
+		// prepare
+		final int quality = 50;
+		final int sellIn = 2;
+		final GildedRose app = prepareTest(CONJURED_VALUE, quality, sellIn);
+
+		// action
+		app.updateQuality();
+
+		// test
+		assertEquals(quality - 2, app.items[0].quality);
+	}
+
+	@Test
+	void whenConjuredShouldQualityNotBeLessThanZero() {
+		// prepare
+		final int quality = 0;
+		final int sellIn = 2;
+		final GildedRose app = prepareTest(CONJURED_VALUE, quality, sellIn);
+
+		// action
+		app.updateQuality();
+
+		// test
+		assertEquals(0, app.items[0].quality);
+	}
+
+	@Test
+	void whenDefaultItemQualityDecrementBy4() {
+		// prepare
+		final int quality = 50;
+		final int sellIn = 0;
+		final GildedRose app = prepareTest(CONJURED_VALUE, quality, sellIn);
+
+		app.updateQuality();
+
+		assertEquals(app.items[0].quality, quality - 4);
+	}
+
+	@Test
+	void whenConjuredItemshouldQualitybeNonZero() {
+		// prepare
+		final int quality = 0;
+		final int sellIn = 0;
+		final GildedRose app = prepareTest(CONJURED_VALUE, quality, sellIn);
+		app.updateQuality();
+
+		assertEquals(0, app.items[0].quality);
+	}
+
+	
+	/* 
+	 * 
+	 * Testing sellIn attributes test cases
+	 * 
+	 *  */
 
 	@Test
 	void whenDefaultItemAndSellInPositiveShouldSellInDecrementBy1() {
@@ -238,7 +302,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenAgedBrieAndPositiveSellInShouldDecrementBy1P1() {
+	void whenAgedBrieAndPositiveSellInShouldSellInDecrementBy1P1() {
 		// prepare
 		final int quality = 1;
 		final int sellIn = 1;
@@ -252,7 +316,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenAgedBrieAndNeativeSellInShouldDecrementBy1() {
+	void whenAgedBrieAndNeativeSellInShouldSellInDecrementBy1() {
 		// prepare
 		final int quality = 1;
 		final int sellIn = 0;
@@ -292,5 +356,28 @@ class GildedRoseTest {
 		// test
 		assertEquals(sellIn - 1, app.items[0].sellIn);
 	}
+	
+	@Test
+	void whenConjuredItemAndSellInPositiveShouldSellInDecrementBy1() {
+		final int quality = 0;
+		final int sellIn = 2;
+
+		final GildedRose app = prepareTest(CONJURED_VALUE, quality, sellIn);
+		app.updateQuality();
+
+		assertEquals(sellIn - 1, app.items[0].sellIn);
+	}
+
+	@Test
+	void whenConjuredItemAndSellInNegativeShouldSellInDecrementBy1() {
+		final int quality = 50;
+		final int sellIn = 2;
+
+		final GildedRose app = prepareTest(CONJURED_VALUE, quality, sellIn);
+		app.updateQuality();
+
+		assertEquals(sellIn - 1, app.items[0].sellIn);
+	}
+
 
 }
