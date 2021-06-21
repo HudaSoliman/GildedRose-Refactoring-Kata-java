@@ -1,99 +1,46 @@
 package com.gildedrose;
 
+import com.gildedrose.item.types.AgedBrie;
+import com.gildedrose.item.types.BackstagePasses;
+import com.gildedrose.item.types.Conjured;
+import com.gildedrose.item.types.Default;
+import com.gildedrose.item.types.Sulfuras;
+
 class GildedRose {
 	Item[] items;
-	static final int QUALITY_MAX_VALUE = 50;
-	static final int BACKSTAGE_PASSES_SELLIN_LIMIT_1 = 10;
-	static final int BACKSTAGE_PASSES_SELLIN_LIMIT_2 = 5;
 
 	public GildedRose(Item[] items) {
 		this.items = items;
 	}
 
-	public void updateQuality() {
+	public void updateQuality() throws Exception {
 		for (Item item : items) {
 			updateItem(item);
 		}
 	}
 
-	private void updateItem(Item item) {
-		decrementSellIn(item);
+	private void updateItem(Item item) throws Exception {
+		String className = item.getClass().getSimpleName();
 
-		ItemType itemType = ItemType.getItemType(item);
-		switch (itemType) {
-		case AGED_BRIE:
-			updateAgedBrie(item);
+		switch (className) {
+		case "Default":
+			((Default) item).update();
 			break;
-		case BACKSTAGE_PASSES:
-			updateBackstagePasses(item);
+		case "AgedBrie":
+			((AgedBrie) item).update();
 			break;
-		case SULFURAS:
-			// do nothing
+		case "Sulfuras":
+			((Sulfuras) item).update();
 			break;
-		case CONJURED:
-			updateConjured(item);
+		case "BackstagePasses":
+			((BackstagePasses) item).update();
+			break;
+		case "Conjured":
+			((Conjured) item).update();
 			break;
 		default:
-			updateDefault(item);
-			break;
-		}
-	}
+			throw new Exception("Unkown item type!" + item.toString());
 
-	private void incrementQuality(Item item, int n) {
-		if (item.quality + n <= QUALITY_MAX_VALUE) {
-			item.quality += n;
-		} else {
-			item.quality = QUALITY_MAX_VALUE;
-		}
-	}
-
-	private void decrementQuality(Item item, int n) {
-		if (item.quality - n >= 0) {
-			item.quality -= n;
-		} else {
-			item.quality = 0;
-		}
-	}
-
-	private void updateAgedBrie(Item item) {
-		if (item.sellIn < 0) {
-			incrementQuality(item, 2);
-		} else {
-			incrementQuality(item, 1);
-		}
-	}
-
-	private void updateConjured(Item item) {
-		if (item.sellIn >= 0) {
-			decrementQuality(item, 2);
-		} else {
-			decrementQuality(item, 4);
-		}
-	}
-
-	private void updateBackstagePasses(Item item) {
-		if (item.sellIn < 0) {
-			item.quality = 0;
-		} else if (item.sellIn <= BACKSTAGE_PASSES_SELLIN_LIMIT_2) {
-			incrementQuality(item, 3);
-		} else if (item.sellIn <= BACKSTAGE_PASSES_SELLIN_LIMIT_1) {
-			incrementQuality(item, 2);
-		} else {
-			incrementQuality(item, 1);
-		}
-	}
-
-	private void updateDefault(Item item) {
-		if (item.sellIn < 0) {
-			decrementQuality(item, 2);
-		} else {
-			decrementQuality(item, 1);
-		}
-	}
-
-	private void decrementSellIn(Item item) {
-		if (!ItemType.getItemType(item).equals(ItemType.SULFURAS)) {
-			item.sellIn--;
 		}
 	}
 
