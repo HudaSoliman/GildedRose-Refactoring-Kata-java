@@ -11,6 +11,9 @@ Add new 'conjured' requirement (TDD style)
 
 Implementing the code in a Strategy Pattern Design: By adding a QualityManager to the GildedRose to handle all the updating algorithm. 
 
+Note: Also, A quick solution added in another branch (Just a simple refactoring and added tests). found  in : 
+    https://github.com/HudaSoliman/GildedRose-Refactoring-Kata-java/tree/alternative_solution
+
 
 
 
