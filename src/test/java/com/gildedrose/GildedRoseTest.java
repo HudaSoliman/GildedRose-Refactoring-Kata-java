@@ -16,14 +16,13 @@ class GildedRoseTest {
 		return new GildedRose(items);
 	}
 
-	
-	/* 
+	/*
 	 * 
 	 * Testing quality attributes test cases
 	 * 
-	 *  */
+	 */
 	@Test
-	void whenDefaultAndNonNegativeSellInShouldDecrementQualityBy1() {
+	void whenDefaultAndNonNegativeSellInShouldDecrementQualityBy1() throws Exception {
 		// prepare
 		final int quality = 50;
 		final int sellIn = 2;
@@ -33,11 +32,11 @@ class GildedRoseTest {
 		app.updateQuality();
 
 		// test
-		assertEquals( quality - 1, app.items[0].quality);
+		assertEquals(quality - 1, app.items[0].quality);
 	}
 
 	@Test
-	void whenDefaultShouldQualityNotBeLessThanZero() {
+	void whenDefaultShouldQualityNotBeLessThanZero() throws Exception {
 		// prepare
 		final int quality = 0;
 		final int sellIn = 2;
@@ -51,7 +50,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenDefaultItemQualityDecrementBy2() {
+	void whenDefaultItemQualityDecrementBy2() throws Exception {
 		// prepare
 		final int quality = 50;
 		final int sellIn = 0;
@@ -62,19 +61,9 @@ class GildedRoseTest {
 		assertEquals(quality - 2, app.items[0].quality);
 	}
 
-	@Test
-	void whenDefaultItemshouldQualitybeNonZero() {
-		// prepare
-		final int quality = 0;
-		final int sellIn = 0;
-		final GildedRose app = prepareTest(DEFAULT_VALUE, quality, sellIn);
-		app.updateQuality();
-
-		assertEquals(0, app.items[0].quality);
-	}
 
 	@Test
-	void whenSulfurasAndPositiveSellInShouldQualityInchanged() {
+	void whenSulfurasAndPositiveSellInShouldQualityInchanged() throws Exception {
 		// prepare
 		final int quality = 80;
 		final int sellIn = 1000;
@@ -85,7 +74,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenSulfurasAndNegativeSellInShouldQualityInchanged() {
+	void whenSulfurasAndNegativeSellInShouldQualityInchanged() throws Exception {
 		// prepare
 		final int quality = 80;
 		final int sellIn = -1000;
@@ -96,18 +85,18 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenAgedBrieAndPositiveSellInShouldQualityIncrementBy1() {
+	void whenAgedBrieAndPositiveSellInShouldQualityIncrementBy1() throws Exception {
 		final int quality = 0;
 		final int sellIn = 2;
 
 		final GildedRose app = prepareTest(AGED_BRIE, quality, sellIn);
 		app.updateQuality();
 
-		assertEquals(quality+1, app.items[0].quality);
+		assertEquals(quality + 1, app.items[0].quality);
 	}
 
 	@Test
-	void whenAgedBrieAndSellInIsNegativeShouldQualityIncrementBy2() {
+	void whenAgedBrieAndSellInIsNegativeShouldQualityIncrementBy2() throws Exception {
 		final int quality = 1;
 		final int sellIn = 0;
 
@@ -118,7 +107,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenAgedBrieShouldQualityMax50() {
+	void whenAgedBrieShouldQualityMax50() throws Exception {
 		final int quality = 49;
 		final int sellIn = 0;
 
@@ -129,7 +118,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenAgedBrieAndQualityIsMaxShouldQualityMax50() {
+	void whenAgedBrieAndQualityIsMaxShouldQualityMax50() throws Exception {
 		final int quality = 50;
 		final int sellIn = 1;
 
@@ -140,7 +129,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenBackstagePassesAndSellInLessThan5ShouldQualityIncrementBy3() {
+	void whenBackstagePassesAndSellInLessThan5ShouldQualityIncrementBy3() throws Exception {
 		final int quality = 1;
 		final int sellIn = 5;
 
@@ -150,10 +139,8 @@ class GildedRoseTest {
 		assertEquals(quality + 3, app.items[0].quality);
 	}
 
-
-
 	@Test
-	void whenBackstagePassesAndSellInLessThan10ShouldQualityIncrementBy2() {
+	void whenBackstagePassesAndSellInLessThan10ShouldQualityIncrementBy2() throws Exception {
 		final int quality = 1;
 		final int sellIn = 7;
 
@@ -163,9 +150,8 @@ class GildedRoseTest {
 		assertEquals(quality + 2, app.items[0].quality);
 	}
 
-
 	@Test
-	void whenBackstagePassesShouldQualityIncrementBy1() {
+	void whenBackstagePassesShouldQualityIncrementBy1() throws Exception {
 		final int quality = 1;
 		final int sellIn = 15;
 
@@ -176,7 +162,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenBackstagePassesShouldQualityMax50() {
+	void whenBackstagePassesShouldQualityMax50() throws Exception {
 		final int quality = 50;
 		final int sellIn = 11;
 
@@ -187,7 +173,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenBackstagePassesAndSellInIsNegativeThenQualityIsZero() {
+	void whenBackstagePassesAndSellInIsNegativeThenQualityIsZero() throws Exception {
 		final int quality = 10;
 		final int sellIn = 0;
 
@@ -197,10 +183,9 @@ class GildedRoseTest {
 
 		assertEquals(0, app.items[0].quality);
 	}
-	
-	
+
 	@Test
-	void whenConjuredAndNonNegativeSellInShouldDecrementQualityBy2() {
+	void whenConjuredAndNonNegativeSellInShouldDecrementQualityBy2() throws Exception {
 		// prepare
 		final int quality = 50;
 		final int sellIn = 2;
@@ -214,7 +199,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenConjuredShouldQualityNotBeLessThanZero() {
+	void whenConjuredShouldQualityNotBeLessThanZero() throws Exception {
 		// prepare
 		final int quality = 0;
 		final int sellIn = 2;
@@ -228,7 +213,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenDefaultItemQualityDecrementBy4() {
+	void whenConjuredItemQualityDecrementBy4() throws Exception {
 		// prepare
 		final int quality = 50;
 		final int sellIn = 0;
@@ -240,7 +225,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenConjuredItemshouldQualitybeNonZero() {
+	void whenConjuredItemshouldQualitybeNonZero() throws Exception {
 		// prepare
 		final int quality = 0;
 		final int sellIn = 0;
@@ -250,15 +235,14 @@ class GildedRoseTest {
 		assertEquals(0, app.items[0].quality);
 	}
 
-	
-	/* 
+	/*
 	 * 
 	 * Testing sellIn attributes test cases
 	 * 
-	 *  */
+	 */
 
 	@Test
-	void whenDefaultItemAndSellInPositiveShouldSellInDecrementBy1() {
+	void whenDefaultItemAndSellInPositiveShouldSellInDecrementBy1() throws Exception {
 		final int quality = 0;
 		final int sellIn = 2;
 
@@ -269,7 +253,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenDefaultItemAndSellInNegativeShouldSellInDecrementBy1() {
+	void whenDefaultItemAndSellInNegativeShouldSellInDecrementBy1() throws Exception {
 		final int quality = 50;
 		final int sellIn = 2;
 
@@ -280,7 +264,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenSulfurasAndPositiveSellInShouldSellInNotchanged() {
+	void whenSulfurasAndPositiveSellInShouldSellInNotchanged() throws Exception {
 		final int quality = 80;
 		final int sellIn = 1000;
 
@@ -291,7 +275,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenSulfurasAndNegativeSellInShouldSellInNotChanged() {
+	void whenSulfurasAndNegativeSellInShouldSellInNotChanged() throws Exception {
 		final int quality = 80;
 		final int sellIn = -1000;
 
@@ -302,7 +286,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenAgedBrieAndPositiveSellInShouldSellInDecrementBy1P1() {
+	void whenAgedBrieAndPositiveSellInShouldSellInDecrementBy1P1() throws Exception {
 		// prepare
 		final int quality = 1;
 		final int sellIn = 1;
@@ -316,7 +300,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenAgedBrieAndNeativeSellInShouldSellInDecrementBy1() {
+	void whenAgedBrieAndNeativeSellInShouldSellInDecrementBy1() throws Exception {
 		// prepare
 		final int quality = 1;
 		final int sellIn = 0;
@@ -330,7 +314,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenBackstagePassesAndSellInIsPositiveShouldSellInDecrementBy1() {
+	void whenBackstagePassesAndSellInIsPositiveShouldSellInDecrementBy1() throws Exception {
 		// prepare
 		final int quality = 1;
 		final int sellIn = 1;
@@ -344,7 +328,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenBackstagePassesAndSellInIsNegativeShouldSellInDecrementBy1() {
+	void whenBackstagePassesAndSellInIsNegativeShouldSellInDecrementBy1() throws Exception {
 		// prepare
 		final int quality = 1;
 		final int sellIn = 0;
@@ -356,9 +340,9 @@ class GildedRoseTest {
 		// test
 		assertEquals(sellIn - 1, app.items[0].sellIn);
 	}
-	
+
 	@Test
-	void whenConjuredItemAndSellInPositiveShouldSellInDecrementBy1() {
+	void whenConjuredItemAndSellInPositiveShouldSellInDecrementBy1() throws Exception {
 		final int quality = 0;
 		final int sellIn = 2;
 
@@ -369,7 +353,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenConjuredItemAndSellInNegativeShouldSellInDecrementBy1() {
+	void whenConjuredItemAndSellInNegativeShouldSellInDecrementBy1() throws Exception {
 		final int quality = 50;
 		final int sellIn = 2;
 
@@ -378,6 +362,5 @@ class GildedRoseTest {
 
 		assertEquals(sellIn - 1, app.items[0].sellIn);
 	}
-
 
 }
