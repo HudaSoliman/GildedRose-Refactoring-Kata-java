@@ -12,7 +12,7 @@ class GildedRoseTest {
 	private static final String CONJURED_VALUE = "Conjured...";
 
 	private GildedRose prepareTest(String itemName, int itemQuality, int itemSellIn) {
-		final Item[] items = new Item[] { ItemCreator.createItem(itemName, itemSellIn, itemQuality) };
+		final Item[] items = new Item[] { new Item(itemName, itemSellIn, itemQuality) };
 		return new GildedRose(items);
 	}
 
@@ -61,16 +61,6 @@ class GildedRoseTest {
 		assertEquals(quality - 2, app.items[0].quality);
 	}
 
-	@Test
-	void whenDefaultItemshouldQualitybeNonZero() throws Exception {
-		// prepare
-		final int quality = 0;
-		final int sellIn = 0;
-		final GildedRose app = prepareTest(DEFAULT_VALUE, quality, sellIn);
-		app.updateQuality();
-
-		assertEquals(0, app.items[0].quality);
-	}
 
 	@Test
 	void whenSulfurasAndPositiveSellInShouldQualityInchanged() throws Exception {
@@ -223,7 +213,7 @@ class GildedRoseTest {
 	}
 
 	@Test
-	void whenDefaultItemQualityDecrementBy4() throws Exception {
+	void whenConjuredItemQualityDecrementBy4() throws Exception {
 		// prepare
 		final int quality = 50;
 		final int sellIn = 0;

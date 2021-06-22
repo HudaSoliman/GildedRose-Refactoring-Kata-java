@@ -4,7 +4,10 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public enum ItemType {
-	AGED_BRIE("Aged Brie"), BACKSTAGE_PASSES("Backstage passes"), SULFURAS("Sulfuras"), CONJURED("Conjured"),
+	AGED_BRIE("Aged Brie"), 
+	BACKSTAGE_PASSES("Backstage passes"), 
+	SULFURAS("Sulfuras"),
+	CONJURED("Conjured"),
 	DEFAULT("*");
 
 	private String type;
